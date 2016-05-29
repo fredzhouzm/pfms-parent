@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/pfms-dao/pfms-dao.iml" filepath="$PROJECT_DIR$/pfms-dao/pfms-dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pfms-parent.iml" filepath="$PROJECT_DIR$/pfms-parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pfms-service/pfms-service.iml" filepath="$PROJECT_DIR$/pfms-service/pfms-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pfms-util/pfms-util.iml" filepath="$PROJECT_DIR$/pfms-util/pfms-util.iml" />
+      <module fileurl="file://$PROJECT_DIR$/pfms-web/pfms-web.iml" filepath="$PROJECT_DIR$/pfms-web/pfms-web.iml" />
+    </modules>
+  </component>
+</project>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.pfms.dao.mybatis.dao.CustomMapper">
+    <select id="selTotAmtByMon" parameterType="java.util.Map" resultType="java.math.BigDecimal">
+        SELECT COALESCE(SUM(AMOUNT),0.00) FROM pfmsdb_form where TYPE=#{type} AND VALUE_DATE BETWEEN #{firstDate} AND #{lastDate} AND CREATOR_ID=#{creator_id}
+    </select>
+</mapper>

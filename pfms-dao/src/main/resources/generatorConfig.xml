@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd" >
+<generatorConfiguration>
+    <classPathEntry
+            location="/Users/fred/.m2/repository/mysql/mysql-connector-java/5.1.37/mysql-connector-java-5.1.37.jar"/>
+    <context id="pfms-dao">
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver" connectionURL="jdbc:mysql://localhost:3306/pfmsdb"
+                        userId="root" password="what001001"/>
+        <javaModelGenerator targetPackage="com.pfms.dao.mybatis.model" targetProject="src/main/java">
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <sqlMapGenerator targetPackage="com.pfms.dao.mybatis.mapper" targetProject="src/main/java"/>
+        <javaClientGenerator targetPackage="com.pfms.dao.mybatis.dao" targetProject="src/main/java" type="XMLMAPPER"/>
+        <table tableName="pfmsdb_form" domainObjectName="PfmsForm"/>
+        <table tableName="pfmsdb_sys" domainObjectName="PfmsSys"/>
+        <table tableName="pfmsdb_usage1" domainObjectName="PfmsUsageOne"/>
+        <table tableName="pfmsdb_usage2" domainObjectName="PfmsUsageTwo"/>
+        <table tableName="pfmsdb_user" domainObjectName="PfmsUser"/>
+        <table tableName="sequence" domainObjectName="Sequence"/>
+        <table tableName="pfmsdb_realStatistics" domainObjectName="RealStatistics"/>
+        <table tableName="pfmsvm_form" domainObjectName="FormVm"/>
+        <table tableName="pfmsvm_proset" domainObjectName="ProsetVm"/>
+    </context>
+</generatorConfiguration>
