@@ -3,6 +3,7 @@ package com.pfms.web.controller.main;
 import com.pfms.dao.mybatis.model.PfmsUsageOne;
 import com.pfms.dao.mybatis.model.PfmsUsageTwo;
 import com.pfms.dao.mybatis.model.PfmsUser;
+import com.pfms.dao.mybatis.model.RealStatistics;
 import com.pfms.service.boss.IProSettingService;
 import com.pfms.util.PersonalUtil;
 import com.pfms.web.domain.Authentication;
@@ -21,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 /**
@@ -81,14 +83,19 @@ public class ProSettingController {
             jsonMap.put("optype", "");
             jsonMap.put("opid", "");
             jsonMap.put("opname", "");
-            jsonMap.put("amount", "");
+            jsonMap.put("oprealMmount", "");
+            jsonMap.put("opbudgetMmount", "");
         } else {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+            String today = sdf.format(new Date());
             PfmsUsageOne pfmsUsageOne = proSettingServiceImp.insertProOneWithPara(proOneNameAdd, type, authentication.getId());
+            RealStatistics realStatisticses = proSettingServiceImp.getOrInsertMonthBudget(pfmsUsageOne.getId(),today,pfmsUsageOne.getMonthbudget());
             jsonMap.put("opstatus", "success");
             jsonMap.put("optype", pfmsUsageOne.getType());
             jsonMap.put("opid", pfmsUsageOne.getId());
             jsonMap.put("opname", pfmsUsageOne.getName());
-            jsonMap.put("amount", personalUtil.bigDecimalToString(pfmsUsageOne.getAmount()));
+            jsonMap.put("oprealMmount", personalUtil.bigDecimalToString(realStatisticses.getRealamount()));
+            jsonMap.put("opbudgetMmount", personalUtil.bigDecimalToString(realStatisticses.getBudget()));
         }
         return jsonMap;
     }
@@ -106,6 +113,7 @@ public class ProSettingController {
         String proTwoNameAdd = (String) map.get("proTwoNameAdd");
         String type = (String) map.get("proTwoType");
         String proOneId = (String) map.get("proOneId");
+        String budget = (String) map.get("proTwoBudgetAdd");
         Map jsonMap = new HashMap();
         if (personalUtil.isBlankOrNull(proTwoNameAdd) || personalUtil.isBlankOrNull(type) || personalUtil.isBlankOrNull(proOneId)) {
             jsonMap.put("opstatus", "fail");
@@ -113,7 +121,10 @@ public class ProSettingController {
             jsonMap.put("opparentid", "");
             jsonMap.put("opid", "");
             jsonMap.put("opname", "");
-            jsonMap.put("amount", "");
+            jsonMap.put("opparentbudgetamount", "");
+            jsonMap.put("opparentrealamount", "");
+            jsonMap.put("opbudgetamount", "");
+            jsonMap.put("oprealamount", "");
         } else {
             //判断此一级科目在当前收入支出项下面是否存在
             List<PfmsUsageOne> pfmsUsageOnes = proSettingServiceImp.getProOne(proOneId, type, authentication.getId());
@@ -123,7 +134,10 @@ public class ProSettingController {
                 jsonMap.put("opparentid", "");
                 jsonMap.put("opid", "");
                 jsonMap.put("opname", "");
-                jsonMap.put("amount", "");
+                jsonMap.put("opparentbudgetamount", "");
+                jsonMap.put("opparentrealamount", "");
+                jsonMap.put("opbudgetamount", "");
+                jsonMap.put("oprealamount", "");
             }
             //向数据库中插入此条二级科目
             else {
@@ -133,6 +147,10 @@ public class ProSettingController {
                 jsonMap.put("opparentid", pfmsUsageTwo.getFatherId());
                 jsonMap.put("opid", pfmsUsageTwo.getId());
                 jsonMap.put("opname", pfmsUsageTwo.getName());
+                jsonMap.put("opparentbudgetamount", "");
+                jsonMap.put("opparentrealamount", "");
+                jsonMap.put("opbudgetamount", "");
+                jsonMap.put("oprealamount", "");
                 jsonMap.put("amount", personalUtil.bigDecimalToString(pfmsUsageTwo.getAmount()));
             }
         }
@@ -140,7 +158,7 @@ public class ProSettingController {
     }
 
     //修改科目名称
-    @RequestMapping(value = "/proModify.json", method = RequestMethod.POST)
+    @RequestMapping(value = "/proOneModify.json", method = RequestMethod.POST)
     @ResponseBody
     public Map modifyPro(@RequestBody Map map) {
         logger.info("开始修改科目名称！");
@@ -151,24 +169,21 @@ public class ProSettingController {
 
         //解析并判断JSON
         String proId = (String) map.get("proId");
-        String level = (String) map.get("level");
         String proNameModify = (String) map.get("proNameModify");
-        if (personalUtil.isBlankOrNull(proId) || personalUtil.isBlankOrNull(level) || personalUtil.isBlankOrNull(proNameModify)) {
+        if (personalUtil.isBlankOrNull(proId) || personalUtil.isBlankOrNull(proNameModify)) {
             resultType = false;
         } else {
-            if ("1".equals(level)) {
-                List<PfmsUsageOne> pfmsUsageOnes = proSettingServiceImp.getProOne(proId, null, null);
-                if (pfmsUsageOnes.size() == 1) {
-                    PfmsUsageOne pfmsUsageOne = pfmsUsageOnes.get(0);
-                    type = pfmsUsageOne.getType();
-                    pfmsUsageOne.setName(proNameModify);
-                    proSettingServiceImp.updateProOne(pfmsUsageOne);
-                    resultType = true;
-                } else {
-                    resultType = false;
-                }
+            List<PfmsUsageOne> pfmsUsageOnes = proSettingServiceImp.getProOne(proId, null, null);
+            if (pfmsUsageOnes.size() == 1) {
+                PfmsUsageOne pfmsUsageOne = pfmsUsageOnes.get(0);
+                type = pfmsUsageOne.getType();
+                pfmsUsageOne.setName(proNameModify);
+                proSettingServiceImp.updateProOne(pfmsUsageOne);
+                resultType = true;
             } else {
-                List<PfmsUsageTwo> pfmsUsageTwos = proSettingServiceImp.getProTwo(proId, null, null, null);
+                resultType = false;
+            }
+                /*List<PfmsUsageTwo> pfmsUsageTwos = proSettingServiceImp.getProTwo(proId, null, null, null);
                 if (pfmsUsageTwos.size() == 1) {
                     PfmsUsageTwo pfmsUsageTwo = pfmsUsageTwos.get(0);
                     type = pfmsUsageTwo.getType();
@@ -177,19 +192,16 @@ public class ProSettingController {
                     resultType = true;
                 } else {
                     resultType = false;
-                }
-            }
+                }*/
         }
         if (resultType) {
             jsonMap.put("opstatus", "success");
             jsonMap.put("optype", type);
-            jsonMap.put("oplvl", level);
             jsonMap.put("opid", proId);
             jsonMap.put("opname", proNameModify);
         } else {
             jsonMap.put("opstatus", "fail");
             jsonMap.put("optype", "");
-            jsonMap.put("oplvl", "");
             jsonMap.put("opid", "");
             jsonMap.put("opname", "");
         }
@@ -250,7 +262,7 @@ public class ProSettingController {
     @ResponseBody
     public Map getProOneName(@RequestBody Map map,HttpServletRequest request){
         Map<String, String> resultMap = new HashMap<String, String>();
-        String id = (String)map.get("id");
+        String id = map.get("id").toString();
         Authentication authentication = (Authentication) request.getSession().getAttribute("session_authentication");
         int userId = authentication.getId();
         List<PfmsUsageOne> pfmsUsageOnes = proSettingServiceImp.getProOne(id,null,userId);
@@ -268,6 +280,8 @@ public class ProSettingController {
         List<PfmsUsageTwo> pfmsUsageTwos;
         List<PfmsUsageOne> pfmsUsageOnes;
         LinkedHashMap<String, LevelOneProject> map = new LinkedHashMap<String, LevelOneProject>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+        String today = sdf.format(new Date());
         pfmsUsageOnes = proSettingServiceImp.getProOne(null, type, userId);
         for (PfmsUsageOne pfmsUsageOne : pfmsUsageOnes) {
             pfmsUsageTwos = proSettingServiceImp.getProTwo(null, type, pfmsUsageOne.getId(), userId);
@@ -275,17 +289,21 @@ public class ProSettingController {
             levelOneProject.setProjectID(pfmsUsageOne.getId());
             levelOneProject.setProjectType(pfmsUsageOne.getType());
             levelOneProject.setProjectName(pfmsUsageOne.getName());
-            levelOneProject.setProjectAmount(personalUtil.bigDecimalToString(pfmsUsageOne.getAmount()));
             levelOneProject.setProjectChildren(pfmsUsageTwos.size());
             for (PfmsUsageTwo pfmsUsageTwo : pfmsUsageTwos) {
                 LevelTwoProject levelTwoProject = new LevelTwoProject();
+                RealStatistics realStatistics = proSettingServiceImp.getOrInsertMonthBudget(pfmsUsageTwo.getId(),today,pfmsUsageTwo.getMonthbudget());
                 levelTwoProject.setProjectID(pfmsUsageTwo.getId());
                 levelTwoProject.setProjectType(pfmsUsageTwo.getType());
                 levelTwoProject.setProjectName(pfmsUsageTwo.getName());
                 levelTwoProject.setProjectFatherID(pfmsUsageTwo.getFatherId());
-                levelTwoProject.setProjectAmount(personalUtil.bigDecimalToString(pfmsUsageTwo.getAmount()));
+                levelTwoProject.setRealAmountByMonth(personalUtil.bigDecimalToString(realStatistics.getRealamount()));
+                levelTwoProject.setProjectMonthBudget(personalUtil.bigDecimalToString(realStatistics.getBudget()));
                 levelOneProject.getLevelTwoProjectList().add(levelTwoProject);
             }
+            RealStatistics realStatisticsForProOne = proSettingServiceImp.getOrInsertMonthBudget(pfmsUsageOne.getId(),today,pfmsUsageOne.getMonthbudget());
+            levelOneProject.setRealAmountByMonth(personalUtil.bigDecimalToString(realStatisticsForProOne.getRealamount()));
+            levelOneProject.setProjectMonthBudget(personalUtil.bigDecimalToString(realStatisticsForProOne.getBudget()));
             map.put(pfmsUsageOne.getId(), levelOneProject);
         }
         return map;

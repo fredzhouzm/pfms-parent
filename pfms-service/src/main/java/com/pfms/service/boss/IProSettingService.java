@@ -2,7 +2,9 @@ package com.pfms.service.boss;
 
 import com.pfms.dao.mybatis.model.PfmsUsageOne;
 import com.pfms.dao.mybatis.model.PfmsUsageTwo;
+import com.pfms.dao.mybatis.model.RealStatistics;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -29,4 +31,6 @@ public interface IProSettingService {
     public PfmsUsageOne insertProOneWithPara(String name, String type, int userId);
 
     public PfmsUsageTwo insertProTwoWithPara(String name, String type, int userId, String fatherId);
+
+    public RealStatistics getOrInsertMonthBudget(String id, String month, BigDecimal money);
 }

@@ -81,18 +81,87 @@ $(document).ready(function () {
         })
     });
 
-    $('#modifyPanelOne').on('show.bs.modal', function (event) {
+    $('#modifyPanelProOne').on('show.bs.modal', function (event) {
+        var modal = $(this);
         var button = $(event.relatedTarget);// Button that triggered the modal
         var proId = button.data('proid');// Extract info from data-* attributes
         var level = button.data('level');
-        var name = getProOneName(proId);
-        if(name == null || name == undefined || name == ''){
+        var proName;
+        var jsonObj={
+            id:proId
+        };
+        var jsonString = JSON.stringify(jsonObj);
+        $.ajax({
+            contentType: "application/json",
+            url: "/setting/getProOneName.json",
+            type: 'POST',
+            data: jsonString,
+            dataType: 'json',
+            success: function (data) {
+                var status = data.opstatus;
+                var name = data.optname;
+                if(status == "success"){
+                    proName = name;
+                    modal.find('#proOneIdForModify').val(proId);
+                    modal.find("#proOneLevelForModify").val(level);
+                    modal.find('#proOneNameModify').val(proName);
+                }else{
+                    return false;
+                }
+            }
+        });
+    });
+
+    //修改一级项目名称的提交按钮触发动作
+    $('body').on('click','#proOneNameModifyBtn',function(){
+        var proOneNameModifyTmp = $('#proOneNameModify').val();
+        if (typeof(proOneNameModifyTmp) == 'undefined' || proOneNameModifyTmp == '' || $.trim(proOneNameModifyTmp) == '') {
             return false;
         }
-        var modal = $(this);
-        modal.find('#proIdForModify').val(proId);
-        modal.find("#proLevelForModify").val(level);
-        modal.find('#proNameModify').val(name);
+        var jsonObj = {
+            proId: $('#proOneIdForModify').val(),
+            proNameModify: $('#proOneNameModify').val()
+        };
+        var jsonString = JSON.stringify(jsonObj);
+        $.ajax({
+            contentType: 'application/json',
+            url: '/setting/proOneModify.json',
+            type: 'POST',
+            data: jsonString,
+            dataType: 'json',
+            success: function (data) {
+                var status = data.opstatus;
+                var type = data.optype;
+                var id = data.opid;
+                var name = data.opname;
+                if (status == 'success') {
+                    if (type == '1') {
+                        var trId = 'incomeOne' + id;
+                        $('tr[id^=incomeOne]').each(function () {
+                            var tr_id = $(this).attr('id');
+                            if (tr_id == trId) {
+                                $(this).children().eq(0).html(name);
+
+                            }
+                        })
+                    }
+                    else {
+                        var trId = 'expendOne' + id;
+                        $('tr[id^=expendOne]').each(function () {
+                            var tr_id = $(this).attr('id');
+                            if (tr_id == trId) {
+                                $(this).children().eq(0).html(name);
+                            }
+                        })
+                    }
+                    $('#modifyPanelProOne').modal('hide');
+                }
+                else {
+                    $('#modifyPanelProOne').modal('hide');
+                    alert('修改项目名称失败!');
+                }
+            }
+        })
     });
 
     $('#modifyPanelTwo').on('show.bs.modal', function (event) {
@@ -116,24 +185,160 @@ $(document).ready(function () {
         else {
             modal.find('#addProOnePanelhead').text('增加一级项目-支出');
         }
-        modal.find('#proOneNameType').val(type);
+        modal.find('#proOneNameAddType').val(type);
+    });
+
+    //新增一级项目时的提交按钮触发动作
+    $('body').on('click', '#proOneNameAddBtn', function () {
+        var proOneNameAddTmp = $('#proOneNameAdd').val();
+        if (typeof(proOneNameAddTmp) == 'undefined' || proOneNameAddTmp == '' || $.trim(proOneNameAddTmp) == '') {
+            return false;
+        }
+        var jsonObject = {
+            proOneType: $('#proOneNameAddType').val(),
+            proOneNameAdd: $('#proOneNameAdd').val()
+        };
+        var jsonString = JSON.stringify(jsonObject);
+        $.ajax({
+            contentType: 'application/json',
+            url: '/setting/addProOne.json',
+            type: 'POST',
+            data: jsonString,
+            dataType: 'json',
+            success: function (data) {
+                var status = data.opstatus;
+                var type = data.optype;
+                var id = data.opid;
+                var name = data.opname;
+                var realMmount = data.oprealMmount;
+                var budgetMmount = data.opbudgetMmount;
+                if (status == 'success') {
+                    if (type == '1') {
+                        var html = '<tr id="incomeOne' + id + '" class="firstForm"><td>' + name + '</td><td></td><td>' + realMmount +'&nbsp;/&nbsp;'+ budgetMmount + '</td><td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelProOne" data-proid="' + id + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '1DelBtn" data-level="1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>';
+                        html += '<tr id="incomeTwo' + id + 'btn" parent="incomeOne' + id + '" style="display: none;"><td></td><td><a class="btn btn-info" id="addIncome' + id + 'ProTwo" data-toggle="modal" data-target="#addProTwoPanel" data-type="1" data-parentid="' + id + '" data-parentname="' + name + '"><i class="icon-plus-sign-alt icon-large"></i>&nbsp;&nbsp;新增二级项目</a></td><td></td><td></td></tr>';
+                        $('tr[id=incomeOneAddBtn]').before(html);
+                    }
+                    else {
+                        var html = '<tr id="expendOne' + id + '" class="firstForm"><td>' + name + '</td><td></td><td>' + realMmount +'&nbsp;/&nbsp;'+ budgetMmount + '</td><td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelProOne" data-proid="' + id + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '1DelBtn" data-level="1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>';
+                        html += '<tr id="expendTwo' + id + 'btn" parent="expendOne' + id + '" style="display: none;"><td></td><td><a class="btn btn-info" id="addExpend' + id + 'ProTwo" data-toggle="modal" data-target="#addProTwoPanel" data-type="2" data-parentid="' + id + '" data-parentname="' + name + '"><i class="icon-plus-sign-alt icon-large"></i>&nbsp;&nbsp;新增二级项目</a></td><td></td><td></td></tr>';
+                        $('tr[id=expendOneAddBtn]').before(html);
+                    }
+                    $('#addProOnePanel').modal('hide');
+                    $('#proOneNameAdd').val('');
+                }
+                else {
+                    $('#addProOnePanel').modal('hide');
+                    $('#proOneNameAdd').val('');
+                    alert('新增一级项目失败!');
+                }
+            }
+        })
     });
 
     $('#addProTwoPanel').on('show.bs.modal', function (event) {
+        var modal = $(this);
         var button = $(event.relatedTarget);// Button that triggered the modal
         var type = button.data('type');// Extract info from data-* attributes
         var parentid = button.data('parentid');
-        var parentname = button.data('parentname');
-        var modal = $(this);
-        if (type == '1') {
-            modal.find('#addProTwoPanelhead').text('增加二级项目-收入');
+        var jsonObj={
+            id:parentid
+        };
+        var jsonString = JSON.stringify(jsonObj);
+        $.ajax({
+            contentType: "application/json",
+            url: "/setting/getProOneName.json",
+            type: 'POST',
+            data: jsonString,
+            dataType: 'json',
+            success: function (data) {
+                var status = data.opstatus;
+                var name = data.optname;
+                if(status == "success"){
+                    if (type == '1') {
+                        modal.find('#addProTwoPanelhead').text('增加二级项目-收入');
+                    }
+                    else {
+                        modal.find('#addProTwoPanelhead').text('增加二级项目-支出');
+                    }
+                    modal.find('#proOneId').val(parentid);
+                    modal.find('#proOneNameAddforProTwo').val(name);
+                    modal.find('#proTwoType').val(type);
+                }else{
+                    return false;
+                }
+            }
+        });
+
+    });
+
+    //新增二级项目时的提交按钮触发动作
+    $('body').on('click','#proTwoAddBtn',function () {
+        var proTwoNameAddTmp = $('#proTwoNameAdd').val();
+        var proTwoBudgetAddTmp = $('#proTwobudgetAdd').val();
+        if (typeof(proTwoNameAddTmp) == 'undefined' || proTwoNameAddTmp == '' || $.trim(proTwoNameAddTmp) == '') {
+            return false;
         }
-        else {
-            modal.find('#addProTwoPanelhead').text('增加二级项目-支出');
+        if (typeof(proTwoBudgetAddTmp) == 'undefined' || proTwoBudgetAddTmp == '' || $.trim(proTwoBudgetAddTmp) == '') {
+            return false;
         }
-        modal.find('#proTwoNameType').val(type);
-        modal.find('#proOneId').val(parentid);
-        modal.find('#proOneNameAddforProTwo').val(parentname);
+        var jsonObject = {
+            proOneId: $('#proOneId').val(),
+            proTwoType: $('#proTwoType').val(),
+            proTwoNameAdd: $('#proTwoNameAdd').val(),
+            proTwoBudgetAdd:$('#proTwobudgetAdd').val()
+        };
+        var jsonString = JSON.stringify(jsonObject);
+        $.ajax({
+            contentType: 'application/json',
+            url: '/setting/addProTwo.json',
+            type: 'POST',
+            data: jsonString,
+            dataType: 'json',
+            success: function (data) {
+                var status = data.opstatus;
+                var type = data.optype;
+                var pid = data.opparentid;
+                var id = data.opid;
+                var name = data.opname;
+                var pbamount = data.opparentbudgetamount;
+                var pramount = data.opparentrealamount;
+                var bamount = data.opbudgetamount;
+                var ramount = data.oprealamount;
+                if (status == 'success') {
+                    if (type == '1') {
+                        var html = '<tr id="incomeTwo' + id + '" parent="incomeOne' + pid + '"><td></td><td>' + name + '</td><td>' + amount + '</td>';
+                        html += '<td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanel" data-proid="' + id + '" data-level="2" data-name="' + name + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '2DelBtn"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>'
+                        var btnId = 'incomeTwo' + pid + 'btn';
+                        $('tr[id^=incomeTwo][id$=btn]').each(function () {
+                            var id_two_btn = $(this).attr("id");
+                            if (btnId == id_two_btn) {
+                                $(this).before(html);
+                            }
+                        })
+                        $('#incomeOne' + pid).find('a').eq(1).hide();
+                    }
+                    else {
+                        var html = '<tr id="expendTwo' + id + '" parent="expendOne' + pid + '"><td></td><td>' + name + '</td><td>' + amount + '</td>';
+                        html += '<td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanel" data-proid="' + id + '" data-level="2" data-name="' + name + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '2DelBtn"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>'
+                        var btnId = 'expendTwo' + pid + 'btn';
+                        $('tr[id^=expendTwo][id$=btn]').each(function () {
+                            var id_two_btn = $(this).attr("id");
+                            if (btnId == id_two_btn) {
+                                $(this).before(html);
+                            }
+                        })
+                        $('#expendOne' + pid).find('a').eq(1).hide();
+                    }
+                    $('#addProTwoPanel').modal('hide');
+                    $('#proTwoNameAdd').val('');
+                }
+                else {
+                    $('#addProTwoPanel').modal('hide');
+                    $('#proTwoNameAdd').val('');
+                    alert('新增二级项目失败!');
+                }
+            }
+        })
     });
 
     $('#deletePanel').on('show.bs.modal', function (event) {
@@ -157,51 +362,7 @@ $(document).ready(function () {
         modal.find('#proNameforDelete').val(name);
     });
 
-    //新增一级项目时的提交按钮触发动作
-    $('body').on('click', '#proOneNameAddBtn', function () {
-        var proOneNameAddTmp = $('#proOneNameAdd').val();
-        if (typeof(proOneNameAddTmp) == 'undefined' || proOneNameAddTmp == '' || $.trim(proOneNameAddTmp) == '') {
-            return false;
-        }
-        var jsonObject = {
-            proOneType: $('#proOneNameType').val(),
-            proOneNameAdd: $('#proOneNameAdd').val()
-        };
-        var jsonString = JSON.stringify(jsonObject);
-        $.ajax({
-            contentType: 'application/json',
-            url: '/setting/addProOne.json',
-            type: 'POST',
-            data: jsonString,
-            dataType: 'json',
-            success: function (data) {
-                var status = data.opstatus;
-                var type = data.optype;
-                var id = data.opid;
-                var name = data.opname;
-                var amount = data.amount;
-                if (status == 'success') {
-                    if (type == '1') {
-                        var html = '<tr id="incomeOne' + id + '" class="firstForm"><td>' + name + '</td><td></td><td>' + amount + '</td><td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanel" data-proid="' + id + '" data-level="1" data-name="' + name + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '1DelBtn"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>';
-                        html += '<tr id="incomeTwo' + id + 'btn" parent="incomeOne' + id + '" style="display: none;"><td></td><td><a class="btn btn-info" id="addIncome' + id + 'ProTwo" data-toggle="modal" data-target="#addProTwoPanel" data-type="1" data-parentid="' + id + '" data-parentname="' + name + '"><i class="icon-plus-sign-alt icon-large"></i>&nbsp;&nbsp;新增二级项目</a></td><td></td><td></td></tr>';
-                        $('tr[id=incomeOneAddBtn]').before(html);
-                    }
-                    else {
-                        var html = '<tr id="expendOne' + id + '" class="firstForm"><td>' + name + '</td><td></td><td>' + amount + '</td><td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanel" data-proid="' + id + '" data-level="1" data-name="' + name + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '1DelBtn"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>';
-                        html += '<tr id="expendTwo' + id + 'btn" parent="expendOne' + id + '" style="display: none;"><td></td><td><a class="btn btn-info" id="addExpend' + id + 'ProTwo" data-toggle="modal" data-target="#addProTwoPanel" data-type="2" data-parentid="' + id + '" data-parentname="' + name + '"><i class="icon-plus-sign-alt icon-large"></i>&nbsp;&nbsp;新增二级项目</a></td><td></td><td></td></tr>';
-                        $('tr[id=expendOneAddBtn]').before(html);
-                    }
-                    $('#addProOnePanel').modal('hide');
-                    $('#proOneNameAdd').val('');
-                }
-                else {
-                    $('#addProOnePanel').modal('hide');
-                    $('#proOneNameAdd').val('');
-                    alert('新增一级项目失败!');
-                }
-            }
-        })
-    });
+
 
     //新增二级项目时的提交按钮触发动作
     $('body').on('click', '#proTwoNameAddBtn', function () {
@@ -397,7 +558,7 @@ $(document).ready(function () {
 
     })
     //
-    function getProOneName(id){
+    function getProOneName(id, proName){
         var jsonObj={
             id:id
         };
@@ -412,13 +573,16 @@ $(document).ready(function () {
                 var status = data.opstatus;
                 var name = data.optname;
                 if(status == "success"){
-                    return name;
+                    proName = name;
+                    return true;
+                }else{
+                    return false;
                 }
             }
         });
     }
 
-    function getProTwoNameAndBudget(id){
+    function getProTwoNameAndBudget(id, proInfo){
         var jsonObj={
             id:id
         };
@@ -434,7 +598,10 @@ $(document).ready(function () {
                 var name = data.optname;
                 var budget = data.optbudget;
                 if(status == "success"){
-                    return {'name':name,'budget':budget};
+                    proInfo = {'name':name,'budget':budget};
+                    return true;
+                }else{
+                    return false;
                 }
             }
         });

@@ -2,10 +2,8 @@ package com.pfms.service.worker;
 
 import com.pfms.dao.mybatis.dao.PfmsUsageOneMapper;
 import com.pfms.dao.mybatis.dao.PfmsUsageTwoMapper;
-import com.pfms.dao.mybatis.model.PfmsUsageOne;
-import com.pfms.dao.mybatis.model.PfmsUsageOneExample;
-import com.pfms.dao.mybatis.model.PfmsUsageTwo;
-import com.pfms.dao.mybatis.model.PfmsUsageTwoExample;
+import com.pfms.dao.mybatis.dao.RealStatisticsMapper;
+import com.pfms.dao.mybatis.model.*;
 import com.pfms.service.boss.IProSettingService;
 import com.pfms.service.boss.ISequenceService;
 import com.pfms.util.Constants;
@@ -36,6 +34,9 @@ public class ProSettingServiceImp implements IProSettingService {
 
     @Autowired
     ISequenceService sequenceService;
+
+    @Autowired
+    RealStatisticsMapper realStatisticsMapper;
 
     @Override
     public void insertProOne(PfmsUsageOne pmfsUsageOne) {
@@ -113,7 +114,8 @@ public class ProSettingServiceImp implements IProSettingService {
         pfmsUsageOne.setId(sequenceService.getId(Constants.SEQ_PRO_ONE_ID));//一级科目ID
         pfmsUsageOne.setType(type);//"1"为收入一级科目，"2"为支出一级科目
         pfmsUsageOne.setName(name);//一级科目名称
-        pfmsUsageOne.setAmount(BigDecimal.valueOf(0.00));//一级科目已获取/消费金额
+        pfmsUsageOne.setMonthbudget(BigDecimal.valueOf(0.00));//一级科目预算金额
+        pfmsUsageOne.setAmount(BigDecimal.valueOf(0.00));//暂时废弃
         pfmsUsageOne.setChildren(0);//一级科目下属的二级科目数量
         pfmsUsageOne.setCreatorId(userId);//创建者/所属者ID
         pfmsUsageOne.setCreateTime(new Date());//创建时间
@@ -135,5 +137,24 @@ public class ProSettingServiceImp implements IProSettingService {
         pfmsUsageTwo.setDescript("");//描述，默认为空
         insertProTwo(pfmsUsageTwo);
         return pfmsUsageTwo;
+    }
+
+    @Override
+    public RealStatistics getOrInsertMonthBudget(String id, String month, BigDecimal money) {
+        RealStatisticsExample realStatisticsExample = new RealStatisticsExample();
+        realStatisticsExample.createCriteria().andIdEqualTo(id).andMonthEqualTo(month);
+        List<RealStatistics> realStatisticses = realStatisticsMapper.selectByExample(realStatisticsExample);
+        if(realStatisticses.size() < 1){
+            RealStatistics realStatistics = new RealStatistics();
+            realStatistics.setId(id);
+            realStatistics.setMonth(month);
+            realStatistics.setBudget(money);
+            realStatistics.setRealamount(new BigDecimal(0.00));
+            realStatisticsMapper.insert(realStatistics);
+            return realStatistics;
+        }
+        else{
+            return realStatisticses.get(0);
+        }
     }
 }

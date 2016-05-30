@@ -37,8 +37,8 @@
                         <tr id="incomeOne${key}">
                             <td>${incomeNode[key].projectName}</td>
                             <td></td>
-                            <td>${incomeNode[key].realAmountByMonth}/${incomeNode[key].projectMonthBudget}</td>
-                            <td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelOne" data-proid="${key}" data-level="1">
+                            <td>${incomeNode[key].realAmountByMonth}&nbsp;/&nbsp;${incomeNode[key].projectMonthBudget}</td>
+                            <td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelProOne" data-proid="${key}" data-level="1">
                                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     <@spring.message 'button.modify'/>
                                 </a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -53,7 +53,7 @@
                                 <tr id="incomeTwo${levelTwoProject.projectID}" parent="incomeOne${key}">
                                     <td></td>
                                     <td>${levelTwoProject.projectName}</td>
-                                    <td>${levelTwoProject.realAmountByMonth}/${levelTwoProject.projectMonthBudget}</td>
+                                    <td>${levelTwoProject.realAmountByMonth}&nbsp;/&nbsp;${levelTwoProject.projectMonthBudget}</td>
                                     <td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelTwo" data-proid="${levelTwoProject.projectID}" data-level="2">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                             <@spring.message 'button.modify'/>
@@ -105,8 +105,8 @@
                         <tr id="expendOne${key}">
                             <td>${expendNode[key].projectName}</td>
                             <td></td>
-                            <td>${expendNode[key].realAmountByMonth}/${expendNode[key].projectMonthBudget}</td>
-                            <td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelOne" data-proid="${key}" data-level="1">
+                            <td>${expendNode[key].realAmountByMonth}&nbsp;/&nbsp;${expendNode[key].projectMonthBudget}</td>
+                            <td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelProOne" data-proid="${key}" data-level="1">
                                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     <@spring.message 'button.modify'/>
                                 </a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -121,7 +121,7 @@
                                 <tr id="expendTwo${levelTwoProject.projectID}" parent="expendOne${key}">
                                     <td></td>
                                     <td>${levelTwoProject.projectName}</td>
-                                    <td>${levelTwoProject.realAmountByMonth}/${levelTwoProject.projectMonthBudget}</td>
+                                    <td>${levelTwoProject.realAmountByMonth}&nbsp;/&nbsp;${levelTwoProject.projectMonthBudget}</td>
                                     <td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelTwo" data-proid="${levelTwoProject.projectID}" data-level="2">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                             <@spring.message 'button.modify'/>
@@ -173,7 +173,6 @@
             <div class="modal-body">
                 <form id="modifyProOne" name="modifyProOne">
                     <input id="proOneIdForModify" name="proOneIdForModify" type="hidden"/>
-                    <input id="proOneLevelForModify" name="proOneLevelForModify" type="hidden"/>
                     <div class="form-group">
                         <label for="proOneNameModify"><@spring.message 'text.proName'/>:</label>
                         <input type="text" name="proOneNameModify" id="proOneNameModify" class="form-control" tabindex="1">
@@ -232,14 +231,10 @@
             </div>
             <div class="modal-body">
                 <form id="addProOne" name="addProOne">
-                    <input id="proOneNameType" name="proOneNameType" type="hidden"/>
+                    <input id="proOneNameAddType" name="proOneNameAddType" type="hidden"/>
                     <div class="form-group">
                         <label for="proOneNameAdd"><@spring.message 'nav.settings.proOne'/>:</label>
                         <input type="text" name="proOneNameAdd" id="proOneNameAdd" class="form-control" tabindex="1">
-                    </div>
-                    <div class="form-group">
-                        <label for="proOnebudgetAdd"><@spring.message 'text.budget'/>:</label>
-                        <input type="text" name="proOnebudgetAdd" id="proOnebudgetAdd" class="form-control" tabindex="2">
                     </div>
                 </form>
             </div>
@@ -263,7 +258,7 @@
             </div>
             <div class="modal-body">
                 <form id="addProTwo" name="addProTwo">
-                    <input id="proTwoNameType" name="proTwoNameType" type="hidden"/>
+                    <input id="proTwoType" name="proTwoType" type="hidden"/>
                     <input id="proOneId" name="proOneId" type="hidden"/>
                     <div class="form-group">
                         <label for="proOneNameAddforProTwo"><@spring.message 'nav.settings.proOne'/>:</label>
@@ -283,8 +278,8 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default"
                         data-dismiss="modal"><@spring.message 'button.cancel'/></button>
-                <button type="button" class="btn btn-primary" name="proTwoNameAddBtn"
-                        id="proTwoNameAddBtn"><@spring.message 'button.submit'/></button>
+                <button type="button" class="btn btn-primary" name="proTwoAddBtn"
+                        id="proTwoAddBtn"><@spring.message 'button.submit'/></button>
             </div>
         </div>
     </div>
