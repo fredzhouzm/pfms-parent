@@ -164,7 +164,7 @@ $(document).ready(function () {
         })
     });
 
-    $('#modifyPanelTwo').on('show.bs.modal', function (event) {
+    $('#modifyPanelProTwo').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);// Button that triggered the modal
         var proId = button.data('proid');// Extract info from data-* attributes
         var level = button.data('level');
@@ -173,6 +173,69 @@ $(document).ready(function () {
         modal.find('#proIdForModify').val(proId);
         modal.find("#proLevelForModify").val(level);
         modal.find('#proNameModify').val(name);
+    });
+
+    //修改二级项目名称的提交按钮触发动作
+    $('body').on('click','#proTwoModifyBtn',function(){
+        var proTwoNameModifyTmp = $('#proTwoNameModify').val();
+        var proTwoBudgetModifyTmp = $('#proTwoBudgetModify').val();
+        if (typeof(proTwoNameModifyTmp) == 'undefined' || proTwoNameModifyTmp == '' || $.trim(proTwoNameModifyTmp) == '') {
+            return false;
+        }
+        if (typeof(proTwoBudgetModifyTmp) == 'undefined' || proTwoBudgetModifyTmp == '' || $.trim(proTwoBudgetModifyTmp) == '') {
+            return false;
+        }
+        var jsonObj = {
+            proTwoId: $('#proTwoIdForModify').val(),
+            proTwoNameModify: $('#proTwoNameModify').val(),
+            proTwoBudgetModify:$('#proTwoBudgetModify').val()
+
+        };
+        var jsonString = JSON.stringify(jsonObj);
+        $.ajax({
+            contentType: 'application/json',
+            url: '/setting/proTwoModify.json',
+            type: 'POST',
+            data: jsonString,
+            dataType: 'json',
+            success: function (data) {
+                var status = data.opstatus;
+                var type = data.optype;
+                var pid = data.opparentid;
+                var id = data.opid;
+                var name = data.opname;
+                var pbamount = data.opparentbudgetamount;
+                var pramount = data.opparentrealamount;
+                var bamount = data.opbudgetamount;
+                var ramount = data.oprealamount;
+                if (status == 'success') {
+                    if (type == '1') {
+                        var trId = 'incomeOne' + id;
+                        $('tr[id^=incomeOne]').each(function () {
+                            var tr_id = $(this).attr('id');
+                            if (tr_id == trId) {
+                                $(this).children().eq(0).html(name);
+
+                            }
+                        })
+                    }
+                    else {
+                        var trId = 'expendOne' + id;
+                        $('tr[id^=expendOne]').each(function () {
+                            var tr_id = $(this).attr('id');
+                            if (tr_id == trId) {
+                                $(this).children().eq(0).html(name);
+                            }
+                        })
+                    }
+                    $('#modifyPanelProOne').modal('hide');
+                }
+                else {
+                    $('#modifyPanelProOne').modal('hide');
+                    alert('修改项目名称失败!');
+                }
+            }
+        })
     });
 
     $('#addProOnePanel').on('show.bs.modal', function (event) {
@@ -306,8 +369,8 @@ $(document).ready(function () {
                 var ramount = data.oprealamount;
                 if (status == 'success') {
                     if (type == '1') {
-                        var html = '<tr id="incomeTwo' + id + '" parent="incomeOne' + pid + '"><td></td><td>' + name + '</td><td>' + amount + '</td>';
-                        html += '<td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanel" data-proid="' + id + '" data-level="2" data-name="' + name + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '2DelBtn"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>'
+                        var html = '<tr id="incomeTwo' + id + '" parent="incomeOne' + pid + '" class="secondForm"><td></td><td>' + name + '</td><td>' + ramount +'&nbsp;/&nbsp;'+ bamount + '</td>';
+                        html += '<td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelProTwo" data-proid="' + id + '" data-level="2"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '2DelBtn" data-level="2"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>'
                         var btnId = 'incomeTwo' + pid + 'btn';
                         $('tr[id^=incomeTwo][id$=btn]').each(function () {
                             var id_two_btn = $(this).attr("id");
@@ -315,11 +378,12 @@ $(document).ready(function () {
                                 $(this).before(html);
                             }
                         })
+                        $('#incomeOne' + pid).find('td').eq(2).html(pramount +'&nbsp;/&nbsp;'+ pbamount);
                         $('#incomeOne' + pid).find('a').eq(1).hide();
                     }
                     else {
-                        var html = '<tr id="expendTwo' + id + '" parent="expendOne' + pid + '"><td></td><td>' + name + '</td><td>' + amount + '</td>';
-                        html += '<td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanel" data-proid="' + id + '" data-level="2" data-name="' + name + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '2DelBtn"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>'
+                        var html = '<tr id="expendTwo' + id + '" parent="expendOne' + pid + '" class="secondForm"><td></td><td>' + name + '</td><td>' + ramount +'&nbsp;/&nbsp;'+ bamount + '</td>';
+                        html += '<td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelProTwo" data-proid="' + id + '" data-level="2"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '2DelBtn"  data-level="2"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>'
                         var btnId = 'expendTwo' + pid + 'btn';
                         $('tr[id^=expendTwo][id$=btn]').each(function () {
                             var id_two_btn = $(this).attr("id");
@@ -327,14 +391,17 @@ $(document).ready(function () {
                                 $(this).before(html);
                             }
                         })
+                        $('#expendOne' + pid).find('td').eq(2).html(pramount +'&nbsp;/&nbsp;'+ pbamount);
                         $('#expendOne' + pid).find('a').eq(1).hide();
                     }
                     $('#addProTwoPanel').modal('hide');
                     $('#proTwoNameAdd').val('');
+                    $('#proTwobudgetAdd').val('');
                 }
                 else {
                     $('#addProTwoPanel').modal('hide');
                     $('#proTwoNameAdd').val('');
+                    $('#proTwobudgetAdd').val('');
                     alert('新增二级项目失败!');
                 }
             }

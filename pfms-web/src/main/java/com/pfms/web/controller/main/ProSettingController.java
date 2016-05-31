@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.math.BigDecimal;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -141,17 +142,29 @@ public class ProSettingController {
             }
             //向数据库中插入此条二级科目
             else {
-                PfmsUsageTwo pfmsUsageTwo = proSettingServiceImp.insertProTwoWithPara(proTwoNameAdd, type, authentication.getId(), proOneId);
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+                String today = sdf.format(new Date());
+                //插入二级科目
+                PfmsUsageTwo pfmsUsageTwo = proSettingServiceImp.insertProTwoWithPara(proTwoNameAdd, type, authentication.getId(), proOneId, budget);
+                //向预算表中插入当月相关的二级科目
+                proSettingServiceImp.getOrInsertMonthBudget(pfmsUsageTwo.getId(), today, pfmsUsageTwo.getMonthbudget());
+                //更新一级科目
+                PfmsUsageOne pfmsUsageOne = pfmsUsageOnes.get(0);
+                BigDecimal bigDecimal = pfmsUsageOne.getMonthbudget();
+                BigDecimal newBigDecimal = bigDecimal.add(pfmsUsageTwo.getMonthbudget());
+                pfmsUsageOne.setMonthbudget(newBigDecimal);
+                proSettingServiceImp.updateProOne(pfmsUsageOne);
+                //在预算表中更新当月相关的一级科目
+                RealStatistics realStatistics = proSettingServiceImp.updateMonthBudget(pfmsUsageOne.getId(),today,newBigDecimal);
                 jsonMap.put("opstatus", "success");
                 jsonMap.put("optype", pfmsUsageTwo.getType());
                 jsonMap.put("opparentid", pfmsUsageTwo.getFatherId());
                 jsonMap.put("opid", pfmsUsageTwo.getId());
                 jsonMap.put("opname", pfmsUsageTwo.getName());
-                jsonMap.put("opparentbudgetamount", "");
-                jsonMap.put("opparentrealamount", "");
-                jsonMap.put("opbudgetamount", "");
-                jsonMap.put("oprealamount", "");
-                jsonMap.put("amount", personalUtil.bigDecimalToString(pfmsUsageTwo.getAmount()));
+                jsonMap.put("opparentbudgetamount", personalUtil.bigDecimalToString(newBigDecimal));
+                jsonMap.put("opparentrealamount", personalUtil.bigDecimalToString(realStatistics.getRealamount()));
+                jsonMap.put("opbudgetamount", personalUtil.bigDecimalToString(pfmsUsageTwo.getMonthbudget()));
+                jsonMap.put("oprealamount", "0.00");
             }
         }
         return jsonMap;

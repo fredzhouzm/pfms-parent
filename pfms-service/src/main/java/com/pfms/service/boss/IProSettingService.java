@@ -30,7 +30,9 @@ public interface IProSettingService {
 
     public PfmsUsageOne insertProOneWithPara(String name, String type, int userId);
 
-    public PfmsUsageTwo insertProTwoWithPara(String name, String type, int userId, String fatherId);
+    public PfmsUsageTwo insertProTwoWithPara(String name, String type, int userId, String fatherId, String budget);
 
     public RealStatistics getOrInsertMonthBudget(String id, String month, BigDecimal money);
+
+    public RealStatistics updateMonthBudget(String id, String month, BigDecimal money);
 }

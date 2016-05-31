@@ -54,7 +54,7 @@
                                     <td></td>
                                     <td>${levelTwoProject.projectName}</td>
                                     <td>${levelTwoProject.realAmountByMonth}&nbsp;/&nbsp;${levelTwoProject.projectMonthBudget}</td>
-                                    <td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelTwo" data-proid="${levelTwoProject.projectID}" data-level="2">
+                                    <td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelProTwo" data-proid="${levelTwoProject.projectID}" data-level="2">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                             <@spring.message 'button.modify'/>
                                         </a>&nbsp;&nbsp;&nbsp;&nbsp;
@@ -122,7 +122,7 @@
                                     <td></td>
                                     <td>${levelTwoProject.projectName}</td>
                                     <td>${levelTwoProject.realAmountByMonth}&nbsp;/&nbsp;${levelTwoProject.projectMonthBudget}</td>
-                                    <td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelTwo" data-proid="${levelTwoProject.projectID}" data-level="2">
+                                    <td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelProTwo" data-proid="${levelTwoProject.projectID}" data-level="2">
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                             <@spring.message 'button.modify'/>
                                         </a>&nbsp;&nbsp;&nbsp;&nbsp;
