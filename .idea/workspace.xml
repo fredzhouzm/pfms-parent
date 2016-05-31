@@ -2,12 +2,199 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2a87c601-432a-4e66-bedd-5eebde68fbb5" name="Default" comment="修改了一级科目的新增和修改">
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/applicationContext.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/dao/CustomMapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/dao/FormVmMapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/dao/PfmsFormMapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/dao/PfmsSysMapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/dao/PfmsUsageOneMapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/dao/PfmsUsageTwoMapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/dao/PfmsUserMapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/dao/ProsetVmMapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/dao/RealStatisticsMapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/dao/SequenceMapper.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/mapper/CustomMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/mapper/FormVmMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/mapper/PfmsFormMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/mapper/PfmsSysMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/mapper/PfmsUsageOneMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/mapper/PfmsUsageTwoMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/mapper/PfmsUserMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/mapper/ProsetVmMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/mapper/RealStatisticsMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/mapper/SequenceMapper.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/FormVm.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/FormVmExample$Criteria.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/FormVmExample$Criterion.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/FormVmExample$GeneratedCriteria.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/FormVmExample.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsForm.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsFormExample$Criteria.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsFormExample$Criterion.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsFormExample$GeneratedCriteria.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsFormExample.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsSys.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsSysExample$Criteria.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsSysExample$Criterion.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsSysExample$GeneratedCriteria.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsSysExample.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsUsageOne.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsUsageOneExample$Criteria.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsUsageOneExample$Criterion.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsUsageOneExample$GeneratedCriteria.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsUsageOneExample.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsUsageTwo.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsUsageTwoExample$Criteria.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsUsageTwoExample$Criterion.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsUsageTwoExample$GeneratedCriteria.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsUsageTwoExample.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsUser.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsUserExample$Criteria.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsUserExample$Criterion.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsUserExample$GeneratedCriteria.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/PfmsUserExample.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/ProsetVm.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/ProsetVmExample$Criteria.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/ProsetVmExample$Criterion.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/ProsetVmExample$GeneratedCriteria.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/ProsetVmExample.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/RealStatistics.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/RealStatisticsExample$Criteria.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/RealStatisticsExample$Criterion.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/RealStatisticsExample$GeneratedCriteria.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/RealStatisticsExample.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/RealStatisticsKey.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/Sequence.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/SequenceExample$Criteria.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/SequenceExample$Criterion.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/SequenceExample$GeneratedCriteria.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/SequenceExample.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/com/pfms/dao/mybatis/model/SequenceKey.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/classes/database.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/maven-archiver/pom.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-dao/target/pfms-dao-1.0-SNAPSHOT.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-service/target/classes/com/pfms/service/boss/IAccountService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-service/target/classes/com/pfms/service/boss/ICommonService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-service/target/classes/com/pfms/service/boss/IProSettingService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-service/target/classes/com/pfms/service/boss/ISequenceService.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-service/target/classes/com/pfms/service/worker/AccountServiceImp.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-service/target/classes/com/pfms/service/worker/CommonServiceImp.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-service/target/classes/com/pfms/service/worker/ProSettingServiceImp.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-service/target/classes/com/pfms/service/worker/SequenceServiceImp.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-service/target/maven-archiver/pom.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-service/target/pfms-service-1.0-SNAPSHOT.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-util/target/classes/com/pfms/util/Constants.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-util/target/classes/com/pfms/util/PersonalUtil.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-util/target/classes/com/pfms/util/SecurOp.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-util/target/maven-archiver/pom.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-util/target/pfms-util-1.0-SNAPSHOT.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-util/target/test-classes/com/pfms/AppTest.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/classes/applicationContext.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/classes/com/pfms/web/controller/main/AccountingController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/classes/com/pfms/web/controller/main/LoginController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/classes/com/pfms/web/controller/main/ProSettingController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/classes/com/pfms/web/domain/Authentication.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/classes/com/pfms/web/domain/FormToShow.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/classes/com/pfms/web/domain/LevelOneProject.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/classes/com/pfms/web/domain/LevelTwoProject.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/classes/com/pfms/web/domain/LoginUser.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/classes/com/pfms/web/domain/RegisterUser.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/classes/com/pfms/web/filter/loginFilter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/classes/log4j.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/classes/message.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/classes/redisConfig.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/maven-archiver/pom.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web.war" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/JavaScript/accountJs.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/JavaScript/bootstrap-datetimepicker.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/JavaScript/bootstrap-datetimepicker.zh-CN.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/JavaScript/bootstrap.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/JavaScript/jquery-2.1.4.min.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/JavaScript/normal.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/classes/applicationContext.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/classes/com/pfms/web/controller/main/AccountingController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/classes/com/pfms/web/controller/main/LoginController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/classes/com/pfms/web/controller/main/ProSettingController.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/classes/com/pfms/web/domain/Authentication.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/classes/com/pfms/web/domain/FormToShow.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/classes/com/pfms/web/domain/LevelOneProject.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/classes/com/pfms/web/domain/LevelTwoProject.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/classes/com/pfms/web/domain/LoginUser.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/classes/com/pfms/web/domain/RegisterUser.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/classes/com/pfms/web/filter/loginFilter.class" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/classes/log4j.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/classes/message.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/classes/redisConfig.properties" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/css/bootstrap-datepicker3.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/css/bootstrap-datetimepicker.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/css/bootstrap.min.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/css/main.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/fonts/glyphicons-halflings-regular.eot" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/fonts/glyphicons-halflings-regular.svg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/fonts/glyphicons-halflings-regular.ttf" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/fonts/glyphicons-halflings-regular.woff" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/fonts/glyphicons-halflings-regular.woff2" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/ftl/account.ftl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/ftl/budgetSettings.ftl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/ftl/download.ftl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/ftl/login.ftl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/ftl/personalSettings.ftl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/ftl/projectSettings.ftl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/ftl/register.ftl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/ftl/report.ftl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/ftl/spring.ftl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/ftl/template.ftl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/ftl/welcome.ftl" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/images/login.jpg" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/ant-1.9.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/ant-launcher-1.9.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/aopalliance-1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/asm-5.0.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/cglib-3.2.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/classmate-1.1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/commons-dbcp-1.4.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/commons-logging-1.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/commons-pool-1.6.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/commons-pool2-2.4.2.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/freemarker-2.3.23.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/hibernate-validator-5.2.2.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/jackson-annotations-2.6.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/jackson-core-2.6.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/jackson-databind-2.6.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/javax.servlet-api-3.1.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/jboss-logging-3.2.1.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/jedis-2.8.1.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/log4j-1.2.17.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/mybatis-3.3.0.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/mybatis-spring-1.2.3.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/mysql-connector-java-5.1.37.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/pfms-dao-1.0-SNAPSHOT.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/pfms-service-1.0-SNAPSHOT.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/pfms-util-1.0-SNAPSHOT.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/slf4j-api-1.7.12.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/slf4j-log4j12-1.7.12.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/spring-aop-4.2.5.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/spring-beans-4.2.5.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/spring-context-4.2.5.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/spring-context-support-4.2.5.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/spring-core-4.2.5.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/spring-data-commons-1.12.1.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/spring-data-keyvalue-1.1.1.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/spring-data-redis-1.7.1.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/spring-expression-4.2.5.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/spring-jdbc-4.2.5.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/spring-messaging-4.2.5.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/spring-oxm-4.2.5.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/spring-session-1.2.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/spring-session-data-redis-1.2.0.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/spring-tx-4.2.5.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/spring-web-4.2.5.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/spring-webmvc-4.2.5.RELEASE.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/lib/validation-api-1.1.0.Final.jar" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/pfms-servlet.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/WEB-INF/web.xml" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/pfms-web/target/pfms-web/index.html" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pfms-service/src/main/java/com/pfms/service/boss/IProSettingService.java" afterPath="$PROJECT_DIR$/pfms-service/src/main/java/com/pfms/service/boss/IProSettingService.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pfms-service/src/main/java/com/pfms/service/worker/ProSettingServiceImp.java" afterPath="$PROJECT_DIR$/pfms-service/src/main/java/com/pfms/service/worker/ProSettingServiceImp.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pfms-web/src/main/java/com/pfms/web/controller/main/ProSettingController.java" afterPath="$PROJECT_DIR$/pfms-web/src/main/java/com/pfms/web/controller/main/ProSettingController.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pfms-web/src/main/webapp/WEB-INF/JavaScript/normal.js" afterPath="$PROJECT_DIR$/pfms-web/src/main/webapp/WEB-INF/JavaScript/normal.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pfms-web/src/main/webapp/WEB-INF/ftl/projectSettings.ftl" afterPath="$PROJECT_DIR$/pfms-web/src/main/webapp/WEB-INF/ftl/projectSettings.ftl" />
     </list>
     <ignored path="pfms-parent.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -318,84 +505,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pfms-parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pfms-parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pfms-service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pfms-parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pfms-parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pfms-service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pfms-parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pfms-parent" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="pfms-service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="main" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="java" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="service" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="boss" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -407,7 +516,7 @@
     <property name="project.structure.last.edited" value="Problems" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Ignored.Files" />
+    <property name="settings.editor.selected.configurable" value="vcs.Git" />
     <property name="settings.editor.splitter.proportion" value="0.2" />
     <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/out" />
@@ -427,7 +536,7 @@
       <recent name="C:\Users\Fred\IdeaProjects\pfms-parent\pfms-web\src\main\resources" />
     </key>
   </component>
-  <component name="RunManager" selected="Maven.Jetty Server">
+  <component name="RunManager" selected="Maven.clean">
     <configuration default="true" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" ALTERNATIVE_JRE_ENABLED="false">
       <deployment />
       <server-settings />
@@ -906,7 +1015,7 @@
       <workItem from="1464001840330" duration="97000" />
       <workItem from="1464492871031" duration="831000" />
       <workItem from="1464532640944" duration="265000" />
-      <workItem from="1464576142692" duration="27229000" />
+      <workItem from="1464576142692" duration="28058000" />
     </task>
     <task id="LOCAL-00001" summary="修改了一级科目的新增和修改">
       <created>1464603074697</created>
@@ -919,7 +1028,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="95777000" />
+    <option name="totallyTimeSpent" value="96606000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -932,7 +1041,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -940,11 +1049,11 @@
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2087327" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.42432433" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42432433" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22229381" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22229381" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32925257" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -962,35 +1071,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32806325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
-    <layout-to-restore>
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32827735" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
-      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.2087327" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32913843" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32925257" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3527027" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32772276" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Java Enterprise" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32900432" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32972974" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.42432433" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Spring" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.22229381" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Bean Validation" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32806325" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
-    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
