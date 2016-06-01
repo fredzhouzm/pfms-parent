@@ -1,5 +1,6 @@
 package com.pfms.service.worker;
 
+import com.pfms.dao.mybatis.dao.CustPfmsUsageTwoMapper;
 import com.pfms.dao.mybatis.dao.PfmsUsageOneMapper;
 import com.pfms.dao.mybatis.dao.PfmsUsageTwoMapper;
 import com.pfms.dao.mybatis.dao.RealStatisticsMapper;
@@ -33,6 +34,9 @@ public class ProSettingServiceImp implements IProSettingService {
     PfmsUsageTwoMapper pfmsUsageTwoMapper;
 
     @Autowired
+    CustPfmsUsageTwoMapper custPfmsUsageTwoMapper;
+
+    @Autowired
     ISequenceService sequenceService;
 
     @Autowired
@@ -45,7 +49,7 @@ public class ProSettingServiceImp implements IProSettingService {
 
     @Override
     public void updateProOne(PfmsUsageOne pfmsUsageOne) {
-        pfmsUsageOneMapper.updateByPrimaryKey(pfmsUsageOne);
+        pfmsUsageOneMapper.updateByPrimaryKeySelective(pfmsUsageOne);
     }
 
     @Override
@@ -60,7 +64,7 @@ public class ProSettingServiceImp implements IProSettingService {
 
     @Override
     public void updateProTwo(PfmsUsageTwo pfmsUsageTwo) {
-        pfmsUsageTwoMapper.updateByPrimaryKey(pfmsUsageTwo);
+        pfmsUsageTwoMapper.updateByPrimaryKeySelective(pfmsUsageTwo);
     }
 
     @Override
@@ -179,5 +183,12 @@ public class ProSettingServiceImp implements IProSettingService {
             realStatisticsMapper.updateByPrimaryKeySelective(realStatistics);
             return realStatistics;
         }
+    }
+
+    @Override
+    public BigDecimal getParentIdBudget(String fatherId) {
+        BigDecimal sumNum = null;
+        sumNum = custPfmsUsageTwoMapper.getAddResultByFatherId(fatherId);
+        return sumNum;
     }
 }

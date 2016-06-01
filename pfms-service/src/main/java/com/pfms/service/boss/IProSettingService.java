@@ -35,4 +35,6 @@ public interface IProSettingService {
     public RealStatistics getOrInsertMonthBudget(String id, String month, BigDecimal money);
 
     public RealStatistics updateMonthBudget(String id, String month, BigDecimal money);
+
+    public BigDecimal getParentIdBudget(String fatherId);
 }

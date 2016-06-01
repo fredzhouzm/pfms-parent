@@ -170,9 +170,29 @@ $(document).ready(function () {
         var level = button.data('level');
         var name = button.data('name');
         var modal = $(this);
-        modal.find('#proIdForModify').val(proId);
-        modal.find("#proLevelForModify").val(level);
-        modal.find('#proNameModify').val(name);
+        var jsonObj={
+            id:proId
+        };
+        var jsonString = JSON.stringify(jsonObj);
+        $.ajax({
+            contentType: "application/json",
+            url: "/setting/getProTwoInfo.json",
+            type: 'POST',
+            data: jsonString,
+            dataType: 'json',
+            success: function (data) {
+                var status = data.opstatus;
+                var name = data.optname;
+                var budget = data.opbudget;
+                if(status == "success"){
+                    modal.find('#proTwoIdForModify').val(proId);
+                    modal.find("#proTwoNameModify").val(name);
+                    modal.find('#proTwoBudgetModify').val(budget);
+                }else{
+                    return false;
+                }
+            }
+        });
     });
 
     //修改二级项目名称的提交按钮触发动作
@@ -210,28 +230,22 @@ $(document).ready(function () {
                 var ramount = data.oprealamount;
                 if (status == 'success') {
                     if (type == '1') {
-                        var trId = 'incomeOne' + id;
-                        $('tr[id^=incomeOne]').each(function () {
-                            var tr_id = $(this).attr('id');
-                            if (tr_id == trId) {
-                                $(this).children().eq(0).html(name);
-
-                            }
-                        })
+                        $('#incomeOne' + pid).find('td').eq(2).html(pramount + '&nbsp;/&nbsp;' + pbamount);
+                        $('#incomeTwo' + id).find('td').eq(1).html(name);
+                        $('#incomeTwo' + id).find('td').eq(2).html(ramount + '&nbsp;/&nbsp;' + bamount);
+                    } else {
+                        $('#expendOne' + pid).find('td').eq(2).html(pramount + '&nbsp;/&nbsp;' + pbamount);
+                        $('#expendTwo' + id).find('td').eq(1).html(name);
+                        $('#expendTwo' + id).find('td').eq(2).html(ramount + '&nbsp;/&nbsp;' + bamount);
                     }
-                    else {
-                        var trId = 'expendOne' + id;
-                        $('tr[id^=expendOne]').each(function () {
-                            var tr_id = $(this).attr('id');
-                            if (tr_id == trId) {
-                                $(this).children().eq(0).html(name);
-                            }
-                        })
-                    }
-                    $('#modifyPanelProOne').modal('hide');
+                    $('#proTwoNameModify').val('');
+                    $('#proTwoBudgetModify').val('');
+                    $('#modifyPanelProTwo').modal('hide');
                 }
                 else {
-                    $('#modifyPanelProOne').modal('hide');
+                    $('#proTwoNameModify').val('');
+                    $('#proTwoBudgetModify').val('');
+                    $('#modifyPanelProTwo').modal('hide');
                     alert('修改项目名称失败!');
                 }
             }
@@ -410,163 +424,34 @@ $(document).ready(function () {
 
     $('#deletePanel').on('show.bs.modal', function (event) {
         var obj = $(event.relatedTarget);// Obj that triggered the modal
-        var proid = obj.data('id');
-        var father = obj.parent().parent();
-        var idlength = proid.length;
-        var proidtr = proid.substring(0, idlength - 7);
-        var name;
-        var level = proid.substring(idlength - 7, idlength - 6);
-        if (level == '1') {
-            name = father.children().eq(0).text();
-        }
-        else {
-            level = '2';
-            name = father.children().eq(1).text();
-        }
+        var proid = obj.data('proid');
+        var level = obj.data('level');
         var modal = $(this);
-        modal.find('#proIdforDelete').val(proidtr);
-        modal.find("#proLevelforDelete").val(level);
-        modal.find('#proNameforDelete').val(name);
-    });
-
-
-
-    //新增二级项目时的提交按钮触发动作
-    $('body').on('click', '#proTwoNameAddBtn', function () {
-        var proTwoNameAddTmp = $('#proTwoNameAdd').val();
-        if (typeof(proTwoNameAddTmp) == 'undefined' || proTwoNameAddTmp == '' || $.trim(proTwoNameAddTmp) == '') {
-            return false;
-        }
-        var jsonObject = {
-            proTwoNameAdd: $('#proTwoNameAdd').val(),
-            proTwoType: $('#proTwoNameType').val(),
-            proOneId: $('#proOneId').val()
-        };
-        var jsonString = JSON.stringify(jsonObject);
-        $.ajax({
-            contentType: 'application/json',
-            url: '/setting/addProTwo.json',
-            type: 'POST',
-            data: jsonString,
-            dataType: 'json',
-            success: function (data) {
-                var status = data.opstatus;
-                var type = data.optype;
-                var pid = data.opparentid;
-                var id = data.opid;
-                var name = data.opname;
-                var amount = data.amount;
-                if (status == 'success') {
-                    if (type == '1') {
-                        var html = '<tr id="incomeTwo' + id + '" parent="incomeOne' + pid + '"><td></td><td>' + name + '</td><td>' + amount + '</td>';
-                        html += '<td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanel" data-proid="' + id + '" data-level="2" data-name="' + name + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '2DelBtn"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>'
-                        var btnId = 'incomeTwo' + pid + 'btn';
-                        $('tr[id^=incomeTwo][id$=btn]').each(function () {
-                            var id_two_btn = $(this).attr("id");
-                            if (btnId == id_two_btn) {
-                                $(this).before(html);
-                            }
-                        })
-                        $('#incomeOne' + pid).find('a').eq(1).hide();
-                    }
-                    else {
-                        var html = '<tr id="expendTwo' + id + '" parent="expendOne' + pid + '"><td></td><td>' + name + '</td><td>' + amount + '</td>';
-                        html += '<td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanel" data-proid="' + id + '" data-level="2" data-name="' + name + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '2DelBtn"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>'
-                        var btnId = 'expendTwo' + pid + 'btn';
-                        $('tr[id^=expendTwo][id$=btn]').each(function () {
-                            var id_two_btn = $(this).attr("id");
-                            if (btnId == id_two_btn) {
-                                $(this).before(html);
-                            }
-                        })
-                        $('#expendOne' + pid).find('a').eq(1).hide();
-                    }
-                    $('#addProTwoPanel').modal('hide');
-                    $('#proTwoNameAdd').val('');
-                }
-                else {
-                    $('#addProTwoPanel').modal('hide');
-                    $('#proTwoNameAdd').val('');
-                    alert('新增二级项目失败!');
-                }
-            }
-        })
-    });
-
-    //修改项目时的修改按钮触发动作
-    $('body').on('click', '#proNameModifyBtn', function () {
-        var proNameModifyTmp = $('#proNameModify').val();
-        if (typeof(proNameModifyTmp) == 'undefined' || proNameModifyTmp == '' || $.trim(proNameModifyTmp) == '') {
-            return false;
-        }
         var jsonObj = {
-            proId: $('#proIdForModify').val(),
-            level: $('#proLevelForModify').val(),
-            proNameModify: $('#proNameModify').val()
+            id:proid,
+            level:level
         };
         var jsonString = JSON.stringify(jsonObj);
         $.ajax({
-            contentType: 'application/json',
-            url: '/setting/proModify.json',
+            contentType: "application/json",
+            url: "/setting/getProInfoForDelete.json",
             type: 'POST',
             data: jsonString,
             dataType: 'json',
             success: function (data) {
                 var status = data.opstatus;
-                var type = data.optype;
-                var level = data.oplvl;
-                var id = data.opid;
-                var name = data.opname;
-                if (status == 'success') {
-                    if (type == '1') {
-                        if (level == '1') {
-                            var trId = 'incomeOne' + id;
-                            $('tr[id^=incomeOne]').each(function () {
-                                var tr_id = $(this).attr('id');
-                                if (tr_id == trId) {
-                                    $(this).children().eq(0).html(name);
-
-                                }
-                            })
-                        }
-                        else {
-                            var trId = 'incomeTwo' + id;
-                            $('tr[id^=incomeTwo]').each(function () {
-                                var tr_id = $(this).attr('id');
-                                if (tr_id == trId) {
-                                    $(this).children().eq(1).html(name);
-                                }
-                            })
-                        }
-                    }
-                    else {
-                        if (level == '1') {
-                            var trId = 'expendOne' + id;
-                            $('tr[id^=expendOne]').each(function () {
-                                var tr_id = $(this).attr('id');
-                                if (tr_id == trId) {
-                                    $(this).children().eq(0).html(name);
-                                }
-                            })
-                        }
-                        else {
-                            var trId = 'expendTwo' + id;
-                            $('tr[id^=expendTwo]').each(function () {
-                                var tr_id = $(this).attr('id');
-                                if (tr_id == trId) {
-                                    $(this).children().eq(1).html(name);
-                                }
-                            })
-                        }
-                    }
-                    $('#modifyPanel').modal('hide');
-                }
-                else {
-                    $('#modifyPanel').modal('hide');
-                    alert('修改项目名称失败!');
+                var name = data.optname;
+                var budget = data.opbudget;
+                if(status == "success"){
+                    modal.find('#proIdforDelete').val(proid);
+                    modal.find("#proLevelforDelete").val(level);
+                    modal.find('#proNameforDelete').val(name);
+                    modal.find('#proBudgetforDelete').val(budget);
+                }else{
+                    return false;
                 }
             }
-        })
+        });
     });
 
     //删除项目时的删除按钮出发动作
@@ -595,10 +480,8 @@ $(document).ready(function () {
                             $('#' + trId).remove();
                         } else {
                             var trId = 'incomeTwo' + id;
-
                             var parentid = $('#incomeTwo' + id).attr('parent');
                             $('#' + trId).remove();
-                            var num = $('tr[parent=' + parentid + ']').length;
                             if ($('tr[parent=' + parentid + ']').length == 1) {
                                 $('#' + parentid).find('a').eq(1).show().attr("disabled", false);
                             }
@@ -611,7 +494,11 @@ $(document).ready(function () {
                             $('#' + trId).remove();
                         } else {
                             var trId = 'expendTwo' + id;
+                            var parentid = $('#expendTwo' + id).attr('parent');
                             $('#' + trId).remove();
+                            if ($('tr[parent=' + parentid + ']').length == 1) {
+                                $('#' + parentid).find('a').eq(1).show().attr("disabled", false);
+                            }
                         }
                     }
                     $('#deletePanel').modal('hide');

@@ -42,7 +42,7 @@
                                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     <@spring.message 'button.modify'/>
                                 </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="${key}" data-level="1" <#if (incomeNode[key].levelTwoProjectList?size)!=0>disabled="disabled"</#if>>
+                                <a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-proid="${key}" data-level="1" <#if (incomeNode[key].levelTwoProjectList?size)!=0>disabled="disabled"</#if>>
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                     <@spring.message 'button.delete'/>
                                 </a>
@@ -58,7 +58,7 @@
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                             <@spring.message 'button.modify'/>
                                         </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="${levelTwoProject.projectID}" data-level="2">
+                                        <a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-proid="${levelTwoProject.projectID}" data-level="2">
                                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                             <@spring.message 'button.delete'/>
                                         </a>
@@ -110,7 +110,7 @@
                                     <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                     <@spring.message 'button.modify'/>
                                 </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                <a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="${key}" data-level="1" <#if (expendNode[key].levelTwoProjectList?size)!=0>disabled="disabled"</#if>>
+                                <a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-proid="${key}" data-level="1" <#if (expendNode[key].levelTwoProjectList?size)!=0>disabled="disabled"</#if>>
                                     <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                     <@spring.message 'button.delete'/>
                                 </a>
@@ -126,7 +126,7 @@
                                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                                             <@spring.message 'button.modify'/>
                                         </a>&nbsp;&nbsp;&nbsp;&nbsp;
-                                        <a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="${levelTwoProject.projectID}" data-level="2">
+                                        <a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-proid="${levelTwoProject.projectID}" data-level="2">
                                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                                             <@spring.message 'button.delete'/>
                                         </a>
