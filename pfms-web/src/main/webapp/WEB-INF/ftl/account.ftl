@@ -133,11 +133,11 @@
                 </td>
                 <td>${form.amount}</td>
                 <td>${form.valueDateStr}&nbsp;${form.peroidStr}</td>
-                <td>${form.proOneStr}-${form.proTwoStr}</td>
+                <td>${form.proOneStr}&nbsp;-&nbsp;${form.proTwoStr}</td>
                 <td>${form.remark}</td>
                 <td>
-                    <a class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
-                    <a class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a>
+                    <a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanel" data-id="${form.id}" data-type="${form.type}"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                    <a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="${form.id}" data-type="${form.type}"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a>
                 </td>
             </tr>
             </#list>
@@ -145,6 +145,107 @@
     </div>
 </div>
 <@template.foot/>
+<!-- moda_1 -->
+<div class="modal fade"  id="modifyPanel" tabindex="-1" role="dialog" aria-labelledby="modifyPanelHead">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modifyPanelHead"><@spring.message 'text.modifyProName'/></h4>
+            </div>
+            <div class="modal-body">
+                <form id="modifyOrder" name="modifyOrder">
+                    <input id="orderIdForModify" name="orderIdForModify" type="hidden"/>
+                    <input id="orderTypeForModify" name="orderTypeForModify" type="hidden"/>
+                    <div class="form-group">
+                        <label for="amountForModify">金额:</label>
+                        <input type="text" name="amountForModify" id="amountForModify" class="form-control" tabindex="1">
+                    </div>
+                    <div class="form-group" id="divForIncomeProOneForModify">
+                        <label for="incomeProOneForModify">一级科目:</label>
+                        <select id="incomeProOneForModify" class="form-control" tabindex="2">
+                            <option value="default">请选择…</option>
+                        <#if incomeProOneList?? && incomeProOneList?size gt 0>
+                            <#list incomeProOneList?keys as key>
+                                <option value="${key}">${incomeProOneList[key]!""}</option>
+                            </#list>
+                        </#if>
+                        </select>
+                    </div>
+                    <div class="form-group" id="divForExpendProOneForModify">
+                        <label for="expendProOneForModify">一级科目:</label>
+                        <select id="expendProOneForModify" class="form-control" tabindex="2">
+                            <option value="default">请选择…</option>
+                            <#if expendProOneList?? && expendProOneList?size gt 0>
+                                <#list expendProOneList?keys as key>
+                                    <option value="${key}">${expendProOneList[key]!""}</option>
+                                </#list>
+                            </#if>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="proTwoForModify">二级科目:</label>
+                        <select id="proTwoForModify" class="form-control" tabindex="3">
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="accountDateForModify">日期:</label>
+                        <div id="datetimepicker" class="input-group date form_date">
+                            <input type="text" class="form-control" id="accountDateForModify" placeholder="YYYY-MM-DD" readonly required tabindex="4"></input>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-remove"></span></span>
+                            <span class="input-group-addon"><span class="glyphicon glyphicon-calendar"></span></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="accountPeriodForModify">时段:</label>
+                        <select id="accountPeriodForModify" class="form-control" tabindex="5">
+                            <option value="00">请选择…</option>
+                            <option value="01">早上</option>
+                            <option value="02">上午</option>
+                            <option value="03">中午</option>
+                            <option value="04">下午</option>
+                            <option value="05">傍晚</option>
+                            <option value="06">晚上</option>
+                            <option value="07">午夜</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="remarkForModify">备注:</label>
+                        <input type="text" class="form-control" id="remarkForModify" tabindex="6">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><@spring.message 'button.cancel'/></button>
+                <button type="button" class="btn btn-primary" name="orderForModifyBtn" id="orderForModifyBtn"><@spring.message 'button.modify'/></button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- modal_2 -->
+<div class="modal fade"  id="deletePanel" tabindex="-1" role="dialog" aria-labelledby="deletePanelHead">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="deletePanelHead"><@spring.message 'text.modifyProName'/></h4>
+            </div>
+            <div class="modal-body">
+                <form id="deleteOrder" name="deleteOrder">
+                    <input id="orderIdForDelete" name="orderIdForDelete" type="hidden"/>
+                    <input id="orderTypeForDelete" name="orderTypeForDelete" type="hidden"/>
+                    <p id="deleteMessage" class="h4">是否确定删除此单据？</p>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><@spring.message 'button.cancel'/></button>
+                <button type="button" class="btn btn-primary" name="orderForDeleteBtn" id="orderForDeleteBtn"><@spring.message 'button.delete'/></button>
+            </div>
+        </div>
+    </div>
+</div>
 </body>
 <script src="../JavaScript/jquery-2.1.4.min.js"></script>
 <script src="../JavaScript/bootstrap.min.js"></script>

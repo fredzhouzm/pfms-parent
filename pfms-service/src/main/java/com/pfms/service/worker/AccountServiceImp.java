@@ -86,15 +86,22 @@ public class AccountServiceImp implements IAccountService {
     }
 
     public PfmsForm getFormById(String formId) {
-        return null;
+        PfmsFormExample pfmsFormExample = new PfmsFormExample();
+        pfmsFormExample.createCriteria().andIdEqualTo(formId);
+        List<PfmsForm> pfmsForms = pfmsFormMapper.selectByExample(pfmsFormExample);
+        if(pfmsForms.size() != 1){
+            return null;
+        }else{
+            return pfmsForms.get(0);
+        }
     }
 
     public void updateForm(PfmsForm pfmsForm) {
-
+        pfmsFormMapper.updateByPrimaryKeySelective(pfmsForm);
     }
 
-    public void deleteForm(PfmsForm pfmsForm) {
-
+    public void deleteForm(String id) {
+        pfmsFormMapper.deleteByPrimaryKey(id);
     }
 
     //获取指定月份的相应金额总和 type-1为收入,type-2为支出
@@ -127,10 +134,18 @@ public class AccountServiceImp implements IAccountService {
         calendar.set(Calendar.MONTH, month - 1);
         if ("B".equals(type)) {
             calendar.set(Calendar.DAY_OF_MONTH, 1);
+            calendar.set(Calendar.HOUR_OF_DAY,0);
+            calendar.set(Calendar.MINUTE,0);
+            calendar.set(Calendar.SECOND,0);
+            calendar.set(Calendar.MILLISECOND,0);
             date = calendar.getTime();
         } else {
             int lastDay = calendar.getActualMaximum(Calendar.DAY_OF_MONTH);
             calendar.set(Calendar.DAY_OF_MONTH, lastDay);
+            calendar.set(Calendar.HOUR_OF_DAY,23);
+            calendar.set(Calendar.MINUTE,59);
+            calendar.set(Calendar.SECOND,59);
+            calendar.set(Calendar.MILLISECOND,999);
             date = calendar.getTime();
         }
         return date;

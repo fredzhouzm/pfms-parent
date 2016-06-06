@@ -32,7 +32,7 @@ public interface IAccountService {
     public void updateForm(PfmsForm pfmsForm);
 
     //删除一条单据
-    public void deleteForm(PfmsForm pfmsForm);
+    public void deleteForm(String id);
 
     //获取指定月份的相应金额总和 type-1为收入,type-2为支出
     public BigDecimal getTotalAmountByMonth(int year, int month, String type, int creatorId);

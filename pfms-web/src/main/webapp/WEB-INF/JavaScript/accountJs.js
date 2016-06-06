@@ -177,8 +177,8 @@ $(document).ready(function () {
                             totalHtml += typeHtml_out;
                         }
                         totalHtml += "</td><td>" + amount + "</td><td>" + date + "&nbsp;" + period + "</td><td>" + pro + "</td><td>" + remark + "</td>";
-                        totalHtml += '<td><a class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-                        totalHtml += '<a class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a>';
+                        totalHtml += '<td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanel" data-id="' + id + '" data-type="' + type + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+                        totalHtml += '<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '" data-type="' + type + '"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a>';
 
                         $('#titleTr').after(totalHtml);
                         $('#totalamountin').html(totalAmountIn);
@@ -222,7 +222,7 @@ $(document).ready(function () {
                     if(hasData == 'yes'){
                         var totalHtml = '';
                         for(var i=0;i<dataList.length;i++){
-                            totalHtml += '<tr><td>';
+                            totalHtml += '<tr id=' + dataList[i].id + '><td>';
                             if(dataList[i].type == "1"){
                                 totalHtml += '<span class="label label-success">收入</span>';
                             }
@@ -235,8 +235,8 @@ $(document).ready(function () {
                             totalHtml += '<td>'+dataList[i].proOneStr+'-'+dataList[i].proTwoStr+'</td>';
                             totalHtml += '<td>'+dataList[i].remark+'</td>';
                             totalHtml += '<td>';
-                            totalHtml += '<a class="btn btn-default btn-xs"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
-                            totalHtml += '<a class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a>';
+                            totalHtml += '<a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanel" data-id="' + dataList[i].id + '" data-type="' + dataList[i].type + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+                            totalHtml += '<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + dataList[i].id + '" data-type="' + dataList[i].type + '"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a>';
                             totalHtml += '</td></tr>';
                         }
                         $('table tr:eq(0)').after(totalHtml);
@@ -259,5 +259,174 @@ $(document).ready(function () {
         $("#accountPeriod").val("");
         $("#remark").val("");
     }
-
+    $('#modifyPanel').on('show.bs.modal',function(event){
+        cleanModifyData();
+        var modal = $(this);
+        var button = $(event.relatedTarget);
+        var id = button.data('id');// Extract info from data-* attributes
+        var type = button.data('type');
+        var jsonObj = {id:id};
+        var jsonString = JSON.stringify(jsonObj);
+        $.ajax({
+            contentType:"application/json",
+            url:"/account/modifyInit.json",
+            type:"POST",
+            data:jsonString,
+            dataType:"json",
+            success:function(data){
+                var status = data.opstatus;
+                var amount = data.opamount;
+                var proone = data.opproone;
+                var protwo = data.protwo;
+                var protwolist = data.opprotwolist;
+                var date = data.opdate;
+                var peroid = data.opperoid;
+                var remark = data.opremark;
+                if(status == "success"){
+                    modal.find('#orderIdForModify').val(id);
+                    modal.find('#orderTypeForModify').val(type);
+                    modal.find('#amountForModify').val(amount);
+                    if(type == '1'){
+                        modal.find('#divForExpendProOneForModify').hide();
+                        modal.find('#expendProOneForModify').attr("disabled","true");
+                        modal.find('#divForIncomeProOneForModify').show();
+                        modal.find('#incomeProOneForModify').removeAttr("disabled");
+                        modal.find('#incomeProOneForModify').val(proone);
+                    }else{
+                        modal.find('#divForIncomeProOneForModify').hide();
+                        modal.find('#incomeProOneForModify').attr("disabled","true");
+                        modal.find('#divForExpendProOneForModify').show();
+                        modal.find('#expendProOneForModify').removeAttr("disabled");
+                        modal.find('#expendProOneForModify').val(proone);
+                    }
+                    var proTwoHtml = '';
+                    for(var o in protwolist){
+                        proTwoHtml += '<option value="' + o + '">' + protwolist[o] + '</option>';
+                    }
+                    modal.find('#proTwoForModify').html(proTwoHtml);
+                    modal.find('#proTwoForModify').val(protwo);
+                    modal.find('#accountDateForModify').val(date);
+                    modal.find('#accountPeriodForModify').val(peroid);
+                    modal.find('#remarkForModify').val(remark);
+                }
+                else{
+                    return false;
+                }
+            }
+        })
+    })
+    $('body').on('click','#orderForModifyBtn',function(){
+        var id = $("#orderIdForModify").val();
+        var type = $("#orderTypeForModify").val();
+        var amount = $("#amountForModify").val();
+        if(type == '1'){
+            var proOneId = $("#incomeProOneForModify").val();
+        } else{
+            var proOneId = $("#expendProOneForModify").val();
+        }
+        var proTwoId = $("#proTwoForModify").val();
+        var date = $("#accountDateForModify").val();
+        var peroid = $("#accountPeriodForModify").val();
+        var remark = $("#remarkForModify").val();
+        var month = $("#searchMonth").val();
+        var jsonObject = {
+            id:id,
+            type: type,
+            amount: amount,
+            proOneId: proOneId,
+            proTwoId: proTwoId,
+            date: date,
+            peroid: peroid,
+            remark: remark,
+            month: month
+        };
+        var jsonString = JSON.stringify(jsonObject);
+        cleanModifyData();
+        $.ajax({
+            contentType: 'application/json',
+            url: '/account/modifyForm.json',
+            type: 'POST',
+            data: jsonString,
+            dataType: 'json',
+            success: function (data) {
+                var status = data.opstatus;
+                var id = data.opid;
+                var amount = data.opamount;
+                var date = data.opdate;
+                var period = data.opperiod;
+                var pro = data.oppro;
+                var remark = data.opremark;
+                var month = data.opselectedMonth;
+                var totalAmountIn = data.optotalAmountIn;
+                var totalAmountOut = data.optotalAmountOut;
+                if(status == 'success'){
+                    var pageMonth = $("#searchMonth").val();
+                    if(month == pageMonth){
+                        var obj = $('#'+id);
+                        obj.find('td').eq(1).html(amount);
+                        obj.find('td').eq(2).html(date + "&nbsp;" + period);
+                        obj.find('td').eq(3).html(pro);
+                        obj.find('td').eq(4).html(remark);
+                        
+                    }else{
+                        $('#'+id).remove();
+                    }
+                    $('#totalamountin').html(totalAmountIn);
+                    $('#totalamountout').html(totalAmountOut);
+                };
+                $('#modifyPanel').modal('hide');
+            }
+        })
+    })
+    function cleanModifyData(){
+        $("#orderIdForModify").val("");
+        $('#orderTypeForModify').val("");
+        $('#amountForModify').val("0.00");
+        $('#incomeProOneForModify').val("default");
+        $('#expendProOneForModify').val("default");
+        $('#proTwoForModify').empty();
+        $("#accountDateForModify").val("");
+        $("#accountPeriodForModify").val("00");
+        $("#remarkForModify").val("");
+    }
+    $('#deletePanel').on('show.bs.modal',function(event){
+        var modal = $(this);
+        var button = $(event.relatedTarget);
+        var id = button.data('id');// Extract info from data-* attributes
+        var type = button.data('type');
+        modal.find('#orderIdForDelete').val(id);
+        modal.find('#orderTypeForDelete').val(type);
+    })
+    $('body').on('click','#orderForDeleteBtn',function(){
+        var id = $("#orderIdForDelete").val();
+        var type = $("#orderTypeForDelete").val();
+        var month = $("#searchMonth").val();
+        var jsonObject = {
+            id:id,
+            type: type,
+            month:month
+        };
+        var jsonString = JSON.stringify(jsonObject);
+        cleanModifyData();
+        $.ajax({
+            contentType: 'application/json',
+            url: '/account/deleteForm.json',
+            type: 'POST',
+            data: jsonString,
+            dataType: 'json',
+            success: function (data) {
+                var status = data.opstatus;
+                var id = data.opid;
+                var amount = data.optype;
+                var totalAmountIn = data.optotalAmountIn;
+                var totalAmountOut = data.optotalAmountOut;
+                if(status == 'success'){
+                    $('#'+id).remove();
+                    $('#totalamountin').html(totalAmountIn);
+                    $('#totalamountout').html(totalAmountOut);
+                };
+                $('#deletePanel').modal('hide');
+            }
+        })
+    })
 })

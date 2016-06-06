@@ -11,6 +11,7 @@ import com.pfms.util.Constants;
 import com.pfms.util.PersonalUtil;
 import com.pfms.web.domain.Authentication;
 import com.pfms.web.domain.FormToShow;
+import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -210,6 +211,137 @@ public class AccountingController {
         return jsonMap;
     }
 
+    @RequestMapping(value = "/modifyInit.json",method = RequestMethod.POST)
+    @ResponseBody
+    public Map modifyInit(@RequestBody Map map, HttpServletRequest request){
+        logger.info("修改单据初始化");
+        String id = map.get("id").toString();
+        logger.info("单据ID编号为："+id);
+        Map jsonMap = new HashMap();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        PfmsForm pfmsForm = accountServiceImp.getFormById(id);
+        String proOneId = pfmsForm.getAccUsage1();
+        if(pfmsForm != null){
+            jsonMap.put("opstatus","success");
+            jsonMap.put("opamount",personalUtil.bigDecimalToString(pfmsForm.getAmount()));
+            jsonMap.put("opproone",pfmsForm.getAccUsage1());
+            jsonMap.put("protwo",pfmsForm.getAccUsage2());
+            jsonMap.put("opdate",sdf.format(pfmsForm.getValueDate()));
+            jsonMap.put("opperoid",pfmsForm.getTimeNo());
+            jsonMap.put("opremark",pfmsForm.getRemark());
+            HashMap<String, String> proTwolist;
+            proTwolist = accountServiceImp.getProTwoByProOne(proOneId);
+            jsonMap.put("opprotwolist",proTwolist);
+        }else{
+            jsonMap.put("opstatus","failure");
+            jsonMap.put("opamount","");
+            jsonMap.put("opproone","");
+            jsonMap.put("protwo","");
+            jsonMap.put("opdate","");
+            jsonMap.put("opperoid","");
+            jsonMap.put("opremark","");
+            jsonMap.put("opprotwolist","");
+        }
+        return jsonMap;
+    }
+
+    @RequestMapping(value = "/modifyForm.json",method = RequestMethod.POST)
+    public Map modifyForm(@RequestBody Map map,HttpServletRequest request) throws ParseException {
+        logger.info("修改单据提交开始");
+        String id = map.get("id").toString();
+        logger.info("单据ID编号为："+id);
+        String type = map.get("type").toString();
+        logger.info("单据类型为："+type);
+        String amount = map.get("amount").toString();
+        logger.info("单据金额为："+amount);
+        String proOneId = map.get("proOneId").toString();
+        logger.info("单据一级科目为："+proOneId);
+        String proTwoId = map.get("proTwoId").toString();
+        logger.info("单据二级科目为："+proTwoId);
+        String date = map.get("date").toString();
+        logger.info("单据日期为："+date);
+        String peroid = map.get("peroid").toString();
+        logger.info("单据时段为："+peroid);
+        String remark = map.get("remark").toString();
+        logger.info("单据备注为："+remark);
+        String month = map.get("month").toString();
+        logger.info("当前页面查询月份为："+month);
+        Map jsonMap = new HashMap();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Authentication authentication = (Authentication) request.getSession().getAttribute("session_authentication");
+        int userId = authentication.getId();
+        PfmsForm pfmsForm = accountServiceImp.getFormById(id);
+        if(pfmsForm == null){
+            jsonMap.put("opstatus", "failure");
+            jsonMap.put("opid","");
+            jsonMap.put("optype","");
+            jsonMap.put("opamount","");
+            jsonMap.put("opdate","");
+            jsonMap.put("opperiod","");
+            jsonMap.put("oppro","");
+            jsonMap.put("opremark","");
+            jsonMap.put("opselectedMonth","");
+            jsonMap.put("optotalAmountIn","");
+            jsonMap.put("optotalAmountOut","");
+            return jsonMap;
+        }else{
+            pfmsForm.setValueDate(sdf.parse(date));
+            pfmsForm.setTimeNo(peroid);
+            pfmsForm.setAmount(new BigDecimal(amount));
+            pfmsForm.setAccUsage1(proOneId);
+            pfmsForm.setAccUsage2(proTwoId);
+            pfmsForm.setModifierId(userId);
+            pfmsForm.setModifyTime(new Date());
+            pfmsForm.setRemark(remark);
+            accountServiceImp.updateForm(pfmsForm);
+            FormVm formVm = accountServiceImp.getFormVmListByCondition(null,null,null,null,null,pfmsForm.getId()).get(0);
+            FormToShow formToShow = formVmToFromShow(formVm);
+
+            int selectedYear = Integer.parseInt(month.substring(0, 4));
+            int seletedMonth = Integer.parseInt(month.substring(4, 6));
+            Double totalAmountIn = accountServiceImp.getTotalAmountByMonth(selectedYear,seletedMonth,"1",userId).doubleValue();
+            Double totalAmountOut = accountServiceImp.getTotalAmountByMonth(selectedYear,seletedMonth,"2",userId).doubleValue();
+            String orderMonth = date.substring(0,4).concat(date.substring(5,7));
+
+            jsonMap.put("opstatus", "success");
+            jsonMap.put("opid",formToShow.getId());
+            jsonMap.put("optype",formToShow.getType());
+            jsonMap.put("opamount",formToShow.getAmount());
+            jsonMap.put("opdate",formToShow.getValueDateStr());
+            jsonMap.put("opperiod",formToShow.getPeroidStr());
+            jsonMap.put("oppro",formToShow.getProOneStr()+"-"+formToShow.getProTwoStr());
+            jsonMap.put("opremark",formToShow.getRemark());
+            jsonMap.put("opselectedMonth",orderMonth);
+            jsonMap.put("optotalAmountIn",decimalFormat.format(totalAmountIn));
+            jsonMap.put("optotalAmountOut",decimalFormat.format(totalAmountOut));
+            return jsonMap;
+        }
+    }
+
+    @RequestMapping(value = "/deleteForm.json",method = RequestMethod.POST)
+    public Map deleteForm(@RequestBody Map map,HttpServletRequest request){
+        logger.info("删除单据开始");
+        String id = map.get("id").toString();
+        logger.info("单据ID编号为："+id);
+        String type = map.get("type").toString();
+        logger.info("单据类型为："+type);
+        String month = map.get("month").toString();
+        logger.info("当前页面查询月份为："+month);
+        Map jsonMap = new HashMap();
+        Authentication authentication = (Authentication) request.getSession().getAttribute("session_authentication");
+        int userId = authentication.getId();
+        accountServiceImp.deleteForm(id);
+        int selectedYear = Integer.parseInt(month.substring(0, 4));
+        int seletedMonth = Integer.parseInt(month.substring(4, 6));
+        Double totalAmountIn = accountServiceImp.getTotalAmountByMonth(selectedYear,seletedMonth,"1",userId).doubleValue();
+        Double totalAmountOut = accountServiceImp.getTotalAmountByMonth(selectedYear,seletedMonth,"2",userId).doubleValue();
+        jsonMap.put("opstatus", "success");
+        jsonMap.put("opid",id);
+        jsonMap.put("optype",type);
+        jsonMap.put("optotalAmountIn",decimalFormat.format(totalAmountIn));
+        jsonMap.put("optotalAmountOut",decimalFormat.format(totalAmountOut));
+        return  jsonMap;
+    }
     public PfmsForm transToForm(String type, String amount, String proOneId, String proTwoId, String date, String peroid, String remark, int userId) throws ParseException {
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");

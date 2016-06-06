@@ -291,12 +291,12 @@ $(document).ready(function () {
                 var budgetMmount = data.opbudgetMmount;
                 if (status == 'success') {
                     if (type == '1') {
-                        var html = '<tr id="incomeOne' + id + '" class="firstForm"><td>' + name + '</td><td></td><td>' + realMmount +'&nbsp;/&nbsp;'+ budgetMmount + '</td><td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelProOne" data-proid="' + id + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '1DelBtn" data-level="1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>';
+                        var html = '<tr id="incomeOne' + id + '" class="firstForm"><td>' + name + '</td><td></td><td>' + realMmount +'&nbsp;/&nbsp;'+ budgetMmount + '</td><td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelProOne" data-proid="' + id + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '1DelBtn" data-level="1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>';
                         html += '<tr id="incomeTwo' + id + 'btn" parent="incomeOne' + id + '" style="display: none;"><td></td><td><a class="btn btn-info" id="addIncome' + id + 'ProTwo" data-toggle="modal" data-target="#addProTwoPanel" data-type="1" data-parentid="' + id + '" data-parentname="' + name + '"><i class="icon-plus-sign-alt icon-large"></i>&nbsp;&nbsp;新增二级项目</a></td><td></td><td></td></tr>';
                         $('tr[id=incomeOneAddBtn]').before(html);
                     }
                     else {
-                        var html = '<tr id="expendOne' + id + '" class="firstForm"><td>' + name + '</td><td></td><td>' + realMmount +'&nbsp;/&nbsp;'+ budgetMmount + '</td><td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelProOne" data-proid="' + id + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '1DelBtn" data-level="1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>';
+                        var html = '<tr id="expendOne' + id + '" class="firstForm"><td>' + name + '</td><td></td><td>' + realMmount +'&nbsp;/&nbsp;'+ budgetMmount + '</td><td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelProOne" data-proid="' + id + '"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '1DelBtn" data-level="1"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>';
                         html += '<tr id="expendTwo' + id + 'btn" parent="expendOne' + id + '" style="display: none;"><td></td><td><a class="btn btn-info" id="addExpend' + id + 'ProTwo" data-toggle="modal" data-target="#addProTwoPanel" data-type="2" data-parentid="' + id + '" data-parentname="' + name + '"><i class="icon-plus-sign-alt icon-large"></i>&nbsp;&nbsp;新增二级项目</a></td><td></td><td></td></tr>';
                         $('tr[id=expendOneAddBtn]').before(html);
                     }
@@ -384,7 +384,7 @@ $(document).ready(function () {
                 if (status == 'success') {
                     if (type == '1') {
                         var html = '<tr id="incomeTwo' + id + '" parent="incomeOne' + pid + '" class="secondForm"><td></td><td>' + name + '</td><td>' + ramount +'&nbsp;/&nbsp;'+ bamount + '</td>';
-                        html += '<td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelProTwo" data-proid="' + id + '" data-level="2"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '2DelBtn" data-level="2"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>'
+                        html += '<td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelProTwo" data-proid="' + id + '" data-level="2"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '2DelBtn" data-level="2"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>'
                         var btnId = 'incomeTwo' + pid + 'btn';
                         $('tr[id^=incomeTwo][id$=btn]').each(function () {
                             var id_two_btn = $(this).attr("id");
@@ -397,7 +397,7 @@ $(document).ready(function () {
                     }
                     else {
                         var html = '<tr id="expendTwo' + id + '" parent="expendOne' + pid + '" class="secondForm"><td></td><td>' + name + '</td><td>' + ramount +'&nbsp;/&nbsp;'+ bamount + '</td>';
-                        html += '<td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelProTwo" data-proid="' + id + '" data-level="2"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '2DelBtn"  data-level="2"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>'
+                        html += '<td><a class="btn btn-default btn-xs" data-toggle="modal" data-target="#modifyPanelProTwo" data-proid="' + id + '" data-level="2"><span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>修改</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-danger btn-xs" data-toggle="modal" data-target="#deletePanel" data-id="' + id + '2DelBtn"  data-level="2"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span>删除</a></td></tr>'
                         var btnId = 'expendTwo' + pid + 'btn';
                         $('tr[id^=expendTwo][id$=btn]').each(function () {
                             var id_two_btn = $(this).attr("id");
