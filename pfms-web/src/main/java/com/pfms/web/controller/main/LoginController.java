@@ -6,7 +6,6 @@ import com.pfms.util.Constants;
 import com.pfms.web.domain.Authentication;
 import com.pfms.web.domain.LoginUser;
 import com.pfms.web.domain.RegisterUser;
-import com.sun.org.apache.xpath.internal.operations.Bool;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,6 @@ import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by Fred on 2015/12/5.
